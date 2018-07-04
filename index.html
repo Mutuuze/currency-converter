@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+    <title>Currency Converter</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+
+    <link href="../css/index.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <main role="main">
+
+      <div class="container">
+        <section class="jumbotron text-center">
+          <h1 class="jumbotron-heading">Currency Converter</h1>
+          <p class="lead text-muted">Select currencies to be converted from and to</p>
+          <p class="lead text-muted">Convert currencies while the application is online or offline</p>
+        </section>
+
+        <div id="select-currency">
+          <form>
+            <div class=form-row>
+              <div class="form-group col-md-6">
+                <input class='form-control' type='text' name='base-amount' id='base-amount' placeholder="Enter amount" value=''>
+              </div>
+            </div>
+
+              <div class="row">
+                <div class="form-group col-md-3">
+                  <label for='base-currency'>From</label>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <select class='form-control' name='base-currency' id='base-currency'>
+                    <option value=''>Select a base currency</option>
+                  </select>
+                </div>
+              </div>
+
+            <div class='form-row'>
+              <div class='form-group col-md-3'>
+                <label for='target-currency'>To</label>
+                <!-- <input class='form-control' type='text' name='target-amount' id='target-amount' placeholder="">-->
+              </div>
+              <div class='form-group col-md-6'>
+                <select class='form-control' name='target-currency' id='target-currency'>
+                  <option value=''>Select a target currency</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <button id="convert" type='submit' class="btn btn-primary">Convert</button>
+            </div>
+          </form>
+          <!--  Alert the converted currency value to the user -->
+          <div id="result">
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="footer-main">
+      <div class="container-fluid">
+        <small>&copy; 2018. Stefkijo. All rights reserved.</small>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="C:/Users/steven/RQM/css/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../css/bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./node_modules/idb/lib/idb.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="./index.js"></script>
+    <!-- <script src="../js/db.js"></script> ->
+
+  </body>
+</html>

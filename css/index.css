@@ -1,0 +1,78 @@
+body {
+  background-color: lightblue;
+}
+
+.jumbotron {
+  background-color: snow;
+  /**margin-bottom: -35px; */
+  margin: auto;
+}
+
+h1 {
+  color: midnightblue;
+}
+
+.container {
+  max-width: 45rem;
+}
+
+.jumbotron-heading {
+  letter-spacing: 2px;
+  font-size: 45px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.lead {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-top: 15px;
+  font-weight: 400;
+}
+
+.text-muted {
+  color: #414951 !important;
+}
+
+.footer-main {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  font-family: Open Sans;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #333;
+  color: white;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+form {
+  padding-top: 35px;
+  margin: 12px;
+}
+
+#search-input {
+  width: 78%;
+  display: inline-block;
+  border: 1px solid #6c757d;
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+}
+
+#result {
+  margin-top: 35px;
+}
+
+#select-currency {
+  background-color: aliceblue;
+  padding: 22px;
+  margin-bottom: 60px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 17px;
+  letter-spacing: 0.2rem;
+}

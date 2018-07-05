@@ -15,18 +15,18 @@ let cachesArray = [
   'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'
 ];
 
-self.addEventListener('install', function(event){
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(cacheName).then(function(cache){
+    caches.open(cacheName).then( cache => {
       return cache.addAll(cachesArray);
     })
   );
 });
 
-self.addEventListener('activate', function(event){
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(function(cacheNames){
-      return Promise.all(cacheNames.map(function(singleCache){
+    caches.keys().then( cacheNames => {
+      return Promise.all(cacheNames.map( singleCache => {
         if (singleCache !== cacheName){
           return caches.delete(singleCache);
         }
@@ -35,11 +35,11 @@ self.addEventListener('activate', function(event){
   );
 });
 
-self.addEventListener('fetch', function(event){
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(function(response){
-      return response || fetch(event.request).then(function(response){
-        return caches.open('cacheName').then(function(cache){
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request).then( response => {
+        return caches.open('cacheName').then( cache => {
           cache.put(event.request, response.clone());
           return response;
         })

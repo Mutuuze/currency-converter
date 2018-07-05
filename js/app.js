@@ -7,8 +7,8 @@ if ('serviceWorker' in navigator) {
 const allCurrenciesUrl = 'https://free.currencyconverterapi.com/api/v5/currencies';
 let baseAmount = 1;
 
-//reate the currency convertor indexedDB database to store queried currencies' exchange rates.
-const dbPromise = idb.open('currency-convertor', 1, function(upgradeDb){
+//create the currency convertor indexedDB database to store queried currencies' exchange rates.
+const dbPromise = idb.open('currency-convertor', 1, upgradeDb => {
   switch (upgradeDb.oldVersion) {
     case 0:
       let currencyStore = upgradeDb.createObjectStore('currencyRates', { keyPath: 'currencyQuery' });
@@ -16,13 +16,13 @@ const dbPromise = idb.open('currency-convertor', 1, function(upgradeDb){
 });
 
 // API call to fetch all currencies and insert them into the SELECT tags.
-fetch(allCurrenciesUrl).then(function(response){
-  let currencies = response.json();
+fetch(allCurrenciesUrl).then(response => {
+  const currencies = response.json();
   return currencies;
-}).then(function(currenciesData){
-  let allCurr = currenciesData.results;
+}).then(currenciesData => {
+  const allCurr = currenciesData.results;
   for (let [key, value] of Object.entries(allCurr)){
-    let selectTags = document.querySelectorAll('select');
+    const selectTags = document.querySelectorAll('select');
     for (tag of selectTags){
       let currencyText = `${value.id} - ${value.currencyName}`;
       let currencyVal = `${value.id}`;
@@ -39,15 +39,15 @@ fetch(allCurrenciesUrl).then(function(response){
 let form = document.querySelector('form');
 
 // if a user submits the form, return the base currency converted to their target currency.
-form.onsubmit = function(e){
+form.onsubmit = e => {
   let baseCurrency = document.querySelector('#base-currency').value;
   let targetCurrency = document.querySelector('#target-currency').value;
-  let queryString = baseCurrency + '_' + targetCurrency;
+  let queryString = `${baseCurrency}_${targetCurrency}`;
   let baseAmount = document.querySelector('#base-amount').value;
-  let queryUrl = 'https://free.currencyconverterapi.com/api/v5/convert?q=' + queryString;
+  let queryUrl = `https://free.currencyconverterapi.com/api/v5/convert?q=${queryString}`;
 
   // Append the result of the currency conversion below the form.
-  function showResult(targetVal){
+  let showResult = targetVal => {
     let parentDiv = document.querySelector('#result');
     let newDiv = document.createElement('DIV');
     newDiv.innerHTML += `${baseAmount} ${baseCurrency} is equal to ${targetVal} ${targetCurrency}`;
@@ -58,20 +58,20 @@ form.onsubmit = function(e){
   }
 
   // calculates the conversion give the base currency rate and amount.
-  function convert(rate){
+  let convert = rate => {
     let targetVal = baseAmount * rate;
     return targetVal;
   }
 
   // Fetch exchange rate for user-given currency query.
-  fetch(queryUrl).then(function(response) {
+  fetch(queryUrl).then( response => {
     myJson = response.json();
     return myJson;
-  }).then(function(data){
+  }).then(data => {
     let targetRate = data.results[queryString].val;
 
     // Store a copy of the queried currencies rate first, to an IDB database.
-    dbPromise.then(function(db){
+    dbPromise.then( db => {
       let tx = db.transaction('currencyRates', 'readwrite');
       let currencyRatesStore = tx.objectStore('currencyRates');
 
@@ -85,15 +85,14 @@ form.onsubmit = function(e){
 
     showResult(convert(targetRate));
 
-  }).catch(function(error){
+  }).catch(error => {
     // fetch currency conversion from the currency-convertor indexedDB, if there is an error.
-      dbPromise.then(function(db){
+      dbPromise.then( db => {
       let tx = db.transaction('currencyRates');
       let currencyRatesStore = tx.objectStore('currencyRates');
+      console.log(`Cannot fetch a response from the network: ${error}`)
       return currencyRatesStore.get(queryString);
-    }).then(function(exch){
-      showResult(convert(exch.rate));
-    });
+    }).then( exch => showResult(convert(exch.rate)) );
   });
 
   // prevent browser from reloading.
